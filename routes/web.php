@@ -47,20 +47,52 @@ Route::prefix('dashboard')
 | Athyla Guilherme - 19-09-2022
 */
 
+Route::prefix('tipo')->middleware(['auth'])->controller(TipoController::class)
+->group(function ()
+{
+    Route::get('/', 'index')->name('tipo.index');
+    Route::get('/novo', 'create')->name('tipo.created');
+    Route::get('/editar/{id}', 'edit')->name('tipo.edit');
+    Route::get('/mostrar/{id}', 'show')->name('tipo.show');
+    Route::post('/cadastrar', 'store')->name('tipo.store');
+    Route::post('/atualizar/{id}', 'update')->name('tipo.update');
+    Route::post('/deletar/{id}', 'destroy')->name('tipo.destroy');
+});
+
 /*
 |--------------------------------------------------------------------------
 | CENTRO DE CUSTO
 |--------------------------------------------------------------------------
 | Athyla Guilherme - 19-09-2022
 */
-
+Route::prefix('centro-de-custo')->middleware(['auth'])->controller(CentroCustoController::class)
+->group(function ()
+{
+    Route::get('/', 'index')->name('centro.index');
+    Route::get('/novo', 'create')->name('centro.created');
+    Route::get('/editar/{id}', 'edit')->name('centro.edit');
+    Route::get('/mostrar/{id}', 'show')->name('centro.show');
+    Route::post('/cadastrar', 'store')->name('centro.store');
+    Route::post('/atualizar/{id}', 'update')->name('centro.update');
+    Route::post('/deletar/{id}', 'destroy')->name('centro.destroy');
+});
 /*
 |--------------------------------------------------------------------------
 | LANÇAMENTOS
 |--------------------------------------------------------------------------
 | Athyla Guilherme - 19-09-2022
 */
-
+Route::prefix('lancamento')->middleware(['auth'])->controller(LancamentoController::class)
+->group(function ()
+{
+    Route::get('/', 'index')->name('lancamento.index');
+    Route::get('/novo', 'create')->name('lancamento.created');
+    Route::get('/editar/{id}', 'edit')->name('lancamento.edit');
+    Route::get('/mostrar/{id}', 'show')->name('lancamento.show');
+    Route::post('/cadastrar', 'store')->name('lancamento.store');
+    Route::post('/atualizar/{id}', 'update')->name('lancamento.update');
+    Route::post('/deletar/{id}', 'destroy')->name('lancamento.destroy');
+});
 /*
 |--------------------------------------------------------------------------
 | RELATORIOS

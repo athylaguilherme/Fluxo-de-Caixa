@@ -11,7 +11,7 @@ class Tipo extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'tipos';
-    protected $primarykey = 'id_tipo';
+    protected $primaryKey = 'id_tipo';
     protected $dates = ['created_at','update_at','deleted_at'];
     protected $fillable = ['tipo'];
 }

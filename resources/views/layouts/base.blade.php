@@ -51,7 +51,7 @@
                             <i class="bi bi-basket-fill"></i>
                             Centro de Custo
                         </a>                        
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('tipo.index') }}">
                             <i class="bi bi-arrow-down-up"></i>
                             Tipos
                         </a>                        
