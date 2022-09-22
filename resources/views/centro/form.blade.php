@@ -3,27 +3,41 @@
 @section('conteudo')
     
     <h1>
-        @if($tipo)
-        Atualizar Tipo
+        @if($centro)
+        <i class="bi bi-basket-fill"></i> Atualizar Centro de custo
         @else
-        Novo Tipo
+        <i class="bi bi-basket-fill"></i>Novo Centro de custo
         @endif
     </h1>
 
-    @if ($tipo)
-    <form action="{{ route('tipo.update', ['id'=>$tipo->id_tipo]) }}" method="post">
+    @if ($centro)
+    <form action="{{ route('centro.update', ['id'=>$centro->id_centro_custo]) }}" method="post">
     @else
-    <form action="{{ route('tipo.store') }}" method="post">
+    <form action="{{ route('centro.store') }}" method="post">
     @endif
         @csrf
         <div class="row">
             <div class="form-group col-md-6">
-              <label for="tipo" class="form-label">Tipo*</label>
-              <input type="text" name="tipo" id="tipo" value="{{ $tipo? $tipo->tipo :old('tipo') }}" class="form-control">
+              <label for="centro" class="form-label">Centro de Custo*</label>
+              <input type="text" name="centro_custo" id="centro_custo" value="{{ $centro? $centro->centro :old('centro') }}" class="form-control">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="id_tipo" class="form-label">Tipo*</label>
+
+                <select name="id_tipo" id="id_tipo" class="form-control">
+                <option value="">Selecione</option>
+                @foreach ($tipos as $tipo )
+                <option value="{{$tipo->id_tipo}}" {{ $centro && $centro->id_tipo == $tipo->id_tipo ? 'selected' : '' }}>
+                    {{$tipo->tipo}}
+                </option>
+                
+                @endforeach
+               </select>
             </div>
 
             <div class="form-group col-md-2">
-                <input  class='btn btn-success' type="submit" value="{{ $tipo? 'Atualizar' : 'Cadastrar' }}">
+                <input  class='btn btn-success' type="submit" value="{{ $centro? 'Atualizar' : 'Cadastrar' }}">
             </div>     
         </div>
     </form>

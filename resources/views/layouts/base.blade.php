@@ -47,7 +47,7 @@
                             <i class="bi bi-piggy-bank-fill"></i>
                             Lancamentos
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('centro.index') }}">
                             <i class="bi bi-basket-fill"></i>
                             Centro de Custo
                         </a>                        
