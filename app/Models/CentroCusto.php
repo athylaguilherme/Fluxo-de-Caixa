@@ -14,7 +14,7 @@ class CentroCusto extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'centro_custos';
-    protected $primarykey = 'id_centro_custo';
+    protected $primaryKey = 'id_centro_custo';
     protected $dates = ['created_at','updated_at','deleted_at'];
     protected $fillable = ['id_tipo', 'centro_custo'];
 
