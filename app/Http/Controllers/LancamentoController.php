@@ -66,9 +66,12 @@ class LancamentoController extends Controller
      * @param  \App\Models\Lancamento  $lancamento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Lancamento $lancamento)
+    public function edit(int $id)
     {
-        //
+        $entradas = CentroCusto::where('id_tipo',1)->orderby('centro_custo');
+        $saidas = CentroCusto::where('id_tipo',2)->orderby('centro_custo');
+        $lancamento = Lancamento::find($id);
+        return view('lancamento.form')->with(compact('entradas','saidas','lancamento'));
     }
 
     /**
@@ -78,9 +81,14 @@ class LancamentoController extends Controller
      * @param  \App\Models\Lancamento  $lancamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Lancamento $lancamento)
+    public function update(Request $request, int $id)
     {
-        //
+        $lancamento = Lancamento::find($id);
+        $lancamento->fill($request->all());
+        $lancamento->save();
+
+        return redirect()->route('lancamento.index')->with('success','Atualizado com Sucesso!');
+
     }
 
     /**

@@ -53,18 +53,18 @@
             <div class="form-group col-md-2">
                 <label for="dt_faturamento" class="form-label">DT Faturamento*</label>
                 <input type="date" name="dt_faturamento" id="dt_faturamento" class="form-control" required
-                value="{{$lancamento ? $lancamentos->dt_faturamento : old('dt_faturamento')}}">
+                value="{{$lancamento ? $lancamento->dt_faturamento->format('Y-m-d') : old('dt_faturamento')}}">
            </div>
            <div class="form-group col-md-2">
                 <label for="valor" class="form-label">Valor*</label>
                 <input type="number" name="valor" id="valor" class="form-control" min="0" required
-                value="{{$lancamento ? $lancamentos->valor : old('valor')}}">
+                value="{{$lancamento ? $lancamento->valor : old('valor')}}">
            </div>
 
            <div class="form-group col-md-12">
                 <label for="descricao" class="form-label">Descrição</label>
                 <textarea name="descricao" id="descricao" rows="3" class="form-control">
-                    {{$lancamento ? $lancamentos->descricao : old('descricao')}}
+                    {{$lancamento ? $lancamento->descricao : old('descricao')}}
                 </textarea>
            </div>
 
