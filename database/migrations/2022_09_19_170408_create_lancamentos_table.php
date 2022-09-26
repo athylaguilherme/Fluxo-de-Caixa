@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('id_user');
             $table->bigInteger('id_centro_custo');
             $table->date('dt_faturamento');
+            $table->decimal('valor',10,2);
             $table->string('descricao')->nullable();
             $table->text('observacoes')->nullable();
             $table->timestamps();

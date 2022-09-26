@@ -2,29 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lancamento;
 use Illuminate\Http\Request;
+use App\Models\{Lancamento, CentroCusto, User, Tipo};
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class LancamentoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar todos o Lançamentos
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $lancamentos = Lancamento::where('id_user',Auth::user()->id_user)->orderby('dt_faturamento','desc');       
+        return View('lancamento.index')->with(compact('lancamentos'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Encaminha para o Formulario de Cadastro
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $lancamento = null;
+        $entradas = CentroCusto::where('id_tipo',1)->orderby('centro_custo');
+        $saidas = CentroCusto::where('id_tipo',2)->orderby('centro_custo');
+
+        return view('lancamento.form')->with(compact('entradas','saidas','lancamento'));
     }
 
     /**
@@ -35,7 +42,11 @@ class LancamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $lancamento = new Lancamento();
+        $lancamento->fill($request->all());
+        $lancamento->id_user = Auth::user()->id_user;
+        $lancamento->save();
+        return redirect()->route('lancamento.index');
     }
 
     /**

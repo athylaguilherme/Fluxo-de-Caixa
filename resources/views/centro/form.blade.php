@@ -19,7 +19,7 @@
         <div class="row">
             <div class="form-group col-md-6">
               <label for="centro" class="form-label">Centro de Custo*</label>
-              <input type="text" name="centro_custo" id="centro_custo" value="{{ $centro? $centro->centro :old('centro') }}" class="form-control">
+              <input type="text" name="centro_custo" id="centro_custo" value="{{ $centro? $centro->centro_custo :old('centro') }}" class="form-control">
             </div>
 
             <div class="form-group col-md-4">
@@ -37,6 +37,7 @@
             </div>
 
             <div class="form-group col-md-2">
+                <label for="btn-enviar" class="form-label">&nbsp;</label>
                 <input  class='btn btn-success' type="submit" value="{{ $centro? 'Atualizar' : 'Cadastrar' }}">
             </div>     
         </div>
