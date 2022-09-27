@@ -10,6 +10,31 @@
         Usuário: {{Auth::user()->nome}} - Total de Lançamento - {{$lancamentos->count()}}
         - R${{$lancamentos->sum('valor')}}
      </h2>
+     {{-- Formulario de Pesquisa --}}
+     <form action="{{ route('lancamento.index') }}" method="get">
+        {{-- @csrf --}}
+        <div class="row">
+            <div class="col-md-4">
+            <input class="form-control" type="text" name="pesquisar" id="pesquisar" 
+            placeholder="Digite o termo a ser pesquisado..." value="{{old('pesquisar')}}"> 
+            </div>
+            
+            <div class="col-2">
+                <input class="form-control" type="date" name="dt_inicio" id="dt_inicio" placeholder="Inicio">
+            </div>
+            <div class="col-2">
+                <input class="form-control" type="date" name="dt_fim" id="dt_fim" placeholder="Fim">
+            </div>
+            
+            <div class="col-md-2">  
+                <input class="btn btn-outline-success" type="submit" value="Pesquisar">
+            </div>
+            
+       </div>
+        
+     </form>
+     {{-- /Formulario de Pesquisa --}}
+
     <table class="table table-striped table-border">
         <thead>
             <tr>

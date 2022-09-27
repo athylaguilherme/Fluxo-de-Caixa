@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\{Lancamento, CentroCusto, User, Tipo};
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
+use DateTime;
 
 class LancamentoController extends Controller
 {
@@ -14,9 +16,48 @@ class LancamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
-        $lancamentos = Lancamento::where('id_user',Auth::user()->id_user)->orderby('dt_faturamento','desc');       
+        $lancamentos = Lancamento::where('id_user',Auth::user()->id_user)->orderby('dt_faturamento','desc');
+        
+
+        //Descrição
+        if($request->get('pesquisar'))
+        {
+            $pesquisar ='%'.$request->get('pesquisar').'%';
+            $lancamentos->where('descricao','like',$pesquisar);
+        }
+
+        //Datas
+        if($request->get('dt_inicio') || $request->get('dt_fim'))
+        {
+            //Data de Incio
+            if ($request->get('dt_inicio')) {
+                $dt_inicio = $request->get('dt_inicio');
+            } else {
+                $dt = new Carbon($request->get('dt_fim'));
+                $dt->subDays(10);
+                $dt_inicio = $dt;
+            }
+            // /Data de Inicio
+
+            //Data de Fim
+            if ($request->get('dt_fim')) {
+                $dt_fim = $request->get('dt_fim');
+            } else {
+                $dt = new Carbon($request->get('dt_inicio'));
+                $dt->addDays(10);
+                $dt_fim = $dt;
+            }
+            // /Data de Fim
+
+            // $dt_inicio = $request->get('dt_inicio');
+            // $dt_fim = $request->get('dt_fim');
+
+            $lancamentos->wherebetween('dt_faturamento',[$dt_inicio,$dt_fim]);
+        }
+
+        
         return View('lancamento.index')->with(compact('lancamentos'));
     }
 
