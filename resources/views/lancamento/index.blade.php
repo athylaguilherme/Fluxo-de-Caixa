@@ -14,7 +14,7 @@
      <form action="{{ route('lancamento.index') }}" method="get">
         {{-- @csrf --}}
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
             <input class="form-control" type="text" name="pesquisar" id="pesquisar" 
             placeholder="Digite o termo a ser pesquisado..." value="{{old('pesquisar')}}"> 
             </div>
@@ -51,7 +51,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($lancamentos->get() as $lancamento)
+            @foreach ($lancamentos as $lancamento)
             <tr>
                 <td> 
                     <a class="btn btn-warning" href="{{ route('lancamento.edit',['id'=>$lancamento->id_lancamento]) }}">
@@ -70,6 +70,12 @@
             @endforeach
         </tbody>
     </table>
+    {{-- Paginação --}}
+    <div>
+        {{$lancamentos->appends(['pesquisar' => request()->get('pesquisar',''), 
+        'dt_inicio' => request()->get('dt_inicio',''),
+        'dt_fim' => request()->get('dt_fim','')])->links()}},
+    </div>
 
 
 @endsection

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use DateTime;
 
+use App\Mail\OlaT91Mail;
+use App\Mail\OlaMd;
+use Illuminate\Support\Facades\Mail;
+
 class LancamentoController extends Controller
 {
     /**
@@ -18,7 +22,8 @@ class LancamentoController extends Controller
      */
     public function index(request $request)
     {
-        $lancamentos = Lancamento::where('id_user',Auth::user()->id_user)->orderby('dt_faturamento','desc');
+        $lancamentos = Lancamento::where('id_user',Auth::user()->id_user)
+        ->orderby('dt_faturamento','desc')->paginate(2);
         
 
         //Descrição
@@ -57,7 +62,11 @@ class LancamentoController extends Controller
             $lancamentos->wherebetween('dt_faturamento',[$dt_inicio,$dt_fim]);
         }
 
-        
+        //Enviar E-mail
+         Mail::to(Auth()->user())->send(new OlaT91Mail(Auth()->user()));
+        // Mail::to('teste@t91.app.br')->send(new OlaMd());
+        //
+
         return View('lancamento.index')->with(compact('lancamentos'));
     }
 
