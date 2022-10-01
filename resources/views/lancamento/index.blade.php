@@ -55,7 +55,7 @@
             <tr>
                 <td> 
                     <a class="btn btn-warning" href="{{ route('lancamento.edit',['id'=>$lancamento->id_lancamento]) }}">
-                        Editar <i class="bi bi-pencil-square"></i> 
+                        <i class="bi bi-pencil-square"></i> 
                     </a> 
                 </td>
                 <td>{{ $lancamento->id_lancamento }}</td>
@@ -71,10 +71,10 @@
         </tbody>
     </table>
     {{-- Paginação --}}
-    <div>
+    <div >
         {{$lancamentos->appends(['pesquisar' => request()->get('pesquisar',''), 
         'dt_inicio' => request()->get('dt_inicio',''),
-        'dt_fim' => request()->get('dt_fim','')])->links()}},
+        'dt_fim' => request()->get('dt_fim','')])->links()}}
     </div>
 
 

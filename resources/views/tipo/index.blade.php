@@ -19,7 +19,9 @@
             @foreach ($tipos->get() as $tipo)
             <tr>
                 <td> 
-                    <a class="btn btn-warning" href="{{ route('tipo.edit',['id'=>$tipo->id_tipo]) }}">Editar <i class="bi bi-pencil-square"></i> </a> 
+                    <a class="btn btn-warning" href="{{ route('tipo.edit',['id'=>$tipo->id_tipo]) }}">
+                        <i class="bi bi-pencil-square"></i> 
+                    </a> 
                 </td>
                 <td>{{ $tipo->id_tipo }}</td>
                 <td>{{ $tipo->tipo }}</td>

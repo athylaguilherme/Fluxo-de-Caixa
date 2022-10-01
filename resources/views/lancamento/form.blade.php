@@ -11,9 +11,9 @@
     </h1>
 
     @if ($lancamento)
-    <form action="{{ route('lancamento.update', ['id'=>$lancamento->id_lancamento]) }}" method="post">
+    <form action="{{ route('lancamento.update', ['id'=>$lancamento->id_lancamento]) }}" method="post" enctype="multipart/form-data">
     @else
-    <form action="{{ route('lancamento.store') }}" method="post">
+    <form action="{{ route('lancamento.store') }}" method="post" enctype="multipart/form-data">
     @endif
         @csrf
         <div class="row">
@@ -60,6 +60,11 @@
                 <input type="number" name="valor" id="valor" class="form-control" min="0" required
                 value="{{$lancamento ? $lancamento->valor : old('valor')}}">
            </div>
+
+           <div class="form-group col-md-12">
+                <label for="arquivo" class="form-label">Arquivo</label>
+                <input type="file" name="arquivo" id="arquivo" class="form-control">
+            </div>
 
            <div class="form-group col-md-12">
                 <label for="descricao" class="form-label">Descrição</label>
